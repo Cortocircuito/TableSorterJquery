@@ -95,11 +95,47 @@
 
   });
 
+    var td,campo,valor,id;
+    $(document).on("click","td.editable span",function(e)
+    {
+      e.preventDefault();
+      $("td:not(.id)").removeClass("editable");
+      td=$(this).closest("td");
+      campo=$(this).closest("td").data("campo");
+      valor=$(this).text();
+      id=$(this).closest("tr").find(".id").text();
+      td.text("").html("<input type='text' name='"+campo+"' value='"+valor+"'><a class='enlace guardar' href='#'>Guardar</a><a class='enlace cancelar' href='#'>Cancelar</a>");
+    });
+    
+    $(document).on("click",".cancelar",function(e)
+    {
+      e.preventDefault();
+      td.html("<span>"+valor+"</span>");
+      $("td:not(.id)").addClass("editable");
+    });
+    
+    $(document).on("click",".guardar",function(e)
+    {
+      $(".mensaje").html("<img src='images/loading.gif'>");
+      e.preventDefault();
+      nuevovalor=$(this).closest("td").find("input").val();
+      $.ajax({
+        type: "POST",
+        url: "editinplace.php",
+        data: { campo: campo, valor: nuevovalor, id:id }
+      })
+      .done(function( msg ) {
+        $(".mensaje").html(msg);
+        td.html("<span>"+nuevovalor+"</span>");
+        $("td:not(.id)").addClass("editable");
+        setTimeout(function() {$('.ok,.ko').fadeOut('fast');}, 3000);
+      });
+    });
 });
 </script>
 </head>
 <body>
-  <table> <!-- bootstrap classes added by the uitheme widget -->
+  <table class="editinplace"> <!-- bootstrap classes added by the uitheme widget -->
     <thead>
       <tr>
         <th>Name</th>
@@ -138,7 +174,7 @@
         </tr>
       </tfoot>
       <tbody>
-        <tr><td>Student01</td><td>Languages</td><td>male</td><td>80</td><td>70</td><td>75</td><td>80</td></tr>
+        <tr><td>Student01</td><td>Languages</td><td>male</td><td>80</td><td>70</td><td>75</td><td class="editable"><span>80</span></td></tr>
         <tr><td>Student02</td><td>Mathematics</td><td>male</td><td>90</td><td>88</td><td>100</td><td>90</td></tr>
         <tr><td>Student03</td><td>Languages</td><td>female</td><td>85</td><td>95</td><td>80</td><td>85</td></tr>
         <tr><td>Student04</td><td>Languages</td><td>male</td><td>60</td><td>55</td><td>100</td><td>100</td></tr>
