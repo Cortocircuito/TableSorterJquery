@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>TableSorter Plugin with Bootstrap</title>
+
   <!-- Bootstrap stylesheet -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <!-- bootstrap widget theme -->
   <link rel="stylesheet" href="css/theme.bootstrap.css">
+  <!-- mis estilos -->
+  <link rel="stylesheet" href="css/estilos.css">
 
+  <!-- jquery library -->
   <script type="text/javascript" src="js/jquery.js"></script>
+
   <!-- tablesorter plugin -->
   <script src="js/jquery.tablesorter.js"></script>
   <!-- tablesorter widget file - loaded after the plugin -->
@@ -95,34 +100,34 @@
 
   });
 
-    var td,campo,valor,id;
-    $(document).on("click","td.editable span",function(e)
-    {
-      e.preventDefault();
-      $("td:not(.id)").removeClass("editable");
-      td=$(this).closest("td");
-      campo=$(this).closest("td").data("campo");
-      valor=$(this).text();
-      id=$(this).closest("tr").find(".id").attr("id");
-      td.text("").html("<input type='text' name='"+campo+"' value='"+valor+"'><a class='enlace guardar' href='#'>Guardar</a>&nbsp;<a class='enlace cancelar' href='#'>Cancelar</a>");
-    });
-    
-    $(document).on("click",".cancelar",function(e)
-    {
-      e.preventDefault();
-      td.html("<span>"+valor+"</span>");
-      $("td:not(.id)").addClass("editable");
-    });
-    
-    $(document).on("click",".guardar",function(e)
-    {
-      $(".mensaje").html("<img src='images/loading.gif'>");
-      e.preventDefault();
-      nuevovalor=$(this).closest("td").find("input").val();
+  var td,campo,valor,id;
+  $(document).on("click","td.editable span",function(e)
+  {
+    e.preventDefault();
+    $("td:not(.id)").removeClass("editable");
+    td=$(this).closest("td");
+    campo=$(this).closest("td").data("campo");
+    valor=$(this).text();
+    id=$(this).closest("tr").find(".id").attr("id");
+    td.text("").html("<input type='text' name='"+campo+"' value='"+valor+"'><a class='enlace guardar' href='#'>Guardar</a><a class='enlace cancelar' href='#'>Cancelar</a>");
+  });
 
-      alert (campo);
-      alert (nuevovalor);
-      alert (id);
+  $(document).on("click",".cancelar",function(e)
+  {
+    e.preventDefault();
+    td.html("<span>"+valor+"</span>");
+    $("td:not(.id)").addClass("editable");
+  });
+
+  $(document).on("click",".guardar",function(e)
+  {
+    $(".mensaje").html("<img src='images/loading.gif'>");
+    e.preventDefault();
+    nuevovalor=$(this).closest("td").find("input").val();
+
+    alert (campo);
+    alert (nuevovalor);
+    alert (id);
 
       // $.ajax({
       //   type: "POST",
@@ -140,1568 +145,1580 @@
 </script>
 </head>
 <body>
-  <table class="editinplace"> <!-- bootstrap classes added by the uitheme widget -->
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>
-          <div>23/11/15 10:00</div>
-          <div>1ªEval Examén</div>
-        </th>
-        <th>
-          <div>01/12/15 10:00</div>
-          <div>1ªEval Trabajo</div>
-        </th>
-        <th>
-          <div>11/03/16 10:00</div>
-          <div>2ªEval Examén</div>
-        </th>
-        <th>
-          <div>25/03/16 10:00</div>
-          <div>2ªEval Oral</div>
-        </th>
-      </tr>
-    </thead>
-      <tfoot>
-        <tr>
-          <th>Nombre</th>
-          <th>
-            <div>23/11/15 10:00</div>
-            <div>1ªEval Examén</div>
-          </th>
-          <th>
-            <div>01/12/15 10:00</div>
-            <div>1ªEval Trabajo</div>
-          </th>
-          <th>
-            <div>11/03/16 10:00</div>
-            <div>2ªEval Examén</div>
-          </th>
-          <th>
-            <div>25/03/16 10:00</div>
-            <div>2ªEval Oral</div>
-          </th>
-        </tr>
-        <tr>
-          <th colspan="5" class="ts-pager form-horizontal">
-            <button type="button" class="btn first"><i class="icon-step-backward glyphicon glyphicon-step-backward"></i></button>
-            <button type="button" class="btn prev"><i class="icon-arrow-left glyphicon glyphicon-backward"></i></button>
-            <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
-            <button type="button" class="btn next"><i class="icon-arrow-right glyphicon glyphicon-forward"></i></button>
-            <button type="button" class="btn last"><i class="icon-step-forward glyphicon glyphicon-step-forward"></i></button>
-            <select class="pagesize input-mini" title="Select page size">
-              <option selected="selected" value="10">10</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-              <option value="40">40</option>
-            </select>
-            <select class="pagenum input-mini" title="Select page number"></select>
-          </th>
-        </tr>
-      </tfoot>
-      <tbody>
-        <!-- (tr>td[id="$" class="id"]{Estudiante$}+(td.editable[data-campo="nota$"]{<span>60</span>})*4)*100 -->
-        <tr>
-          <td id="1" class="id">Estudiante1</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="2" class="id">Estudiante2</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="3" class="id">Estudiante3</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="4" class="id">Estudiante4</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="5" class="id">Estudiante5</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="6" class="id">Estudiante6</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="7" class="id">Estudiante7</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="8" class="id">Estudiante8</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="9" class="id">Estudiante9</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="10" class="id">Estudiante10</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="11" class="id">Estudiante11</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="12" class="id">Estudiante12</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="13" class="id">Estudiante13</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="14" class="id">Estudiante14</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="15" class="id">Estudiante15</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="16" class="id">Estudiante16</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="17" class="id">Estudiante17</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="18" class="id">Estudiante18</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="19" class="id">Estudiante19</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="20" class="id">Estudiante20</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="21" class="id">Estudiante21</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="22" class="id">Estudiante22</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="23" class="id">Estudiante23</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="24" class="id">Estudiante24</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="25" class="id">Estudiante25</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="26" class="id">Estudiante26</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="27" class="id">Estudiante27</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="28" class="id">Estudiante28</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="29" class="id">Estudiante29</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="30" class="id">Estudiante30</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="31" class="id">Estudiante31</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="32" class="id">Estudiante32</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="33" class="id">Estudiante33</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="34" class="id">Estudiante34</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="35" class="id">Estudiante35</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="36" class="id">Estudiante36</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="37" class="id">Estudiante37</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="38" class="id">Estudiante38</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="39" class="id">Estudiante39</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="40" class="id">Estudiante40</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="41" class="id">Estudiante41</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="42" class="id">Estudiante42</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="43" class="id">Estudiante43</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="44" class="id">Estudiante44</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="45" class="id">Estudiante45</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="46" class="id">Estudiante46</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="47" class="id">Estudiante47</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="48" class="id">Estudiante48</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="49" class="id">Estudiante49</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="50" class="id">Estudiante50</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="51" class="id">Estudiante51</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="52" class="id">Estudiante52</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="53" class="id">Estudiante53</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="54" class="id">Estudiante54</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="55" class="id">Estudiante55</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="56" class="id">Estudiante56</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="57" class="id">Estudiante57</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="58" class="id">Estudiante58</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="59" class="id">Estudiante59</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="60" class="id">Estudiante60</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="61" class="id">Estudiante61</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="62" class="id">Estudiante62</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="63" class="id">Estudiante63</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="64" class="id">Estudiante64</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="65" class="id">Estudiante65</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="66" class="id">Estudiante66</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="67" class="id">Estudiante67</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="68" class="id">Estudiante68</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="69" class="id">Estudiante69</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="70" class="id">Estudiante70</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="71" class="id">Estudiante71</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="72" class="id">Estudiante72</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="73" class="id">Estudiante73</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="74" class="id">Estudiante74</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="75" class="id">Estudiante75</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="76" class="id">Estudiante76</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="77" class="id">Estudiante77</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="78" class="id">Estudiante78</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="79" class="id">Estudiante79</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="80" class="id">Estudiante80</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="81" class="id">Estudiante81</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="82" class="id">Estudiante82</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="83" class="id">Estudiante83</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="84" class="id">Estudiante84</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="85" class="id">Estudiante85</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="86" class="id">Estudiante86</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="87" class="id">Estudiante87</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="88" class="id">Estudiante88</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="89" class="id">Estudiante89</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="90" class="id">Estudiante90</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="91" class="id">Estudiante91</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="92" class="id">Estudiante92</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="93" class="id">Estudiante93</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="94" class="id">Estudiante94</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="95" class="id">Estudiante95</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="96" class="id">Estudiante96</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="97" class="id">Estudiante97</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="98" class="id">Estudiante98</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="99" class="id">Estudiante99</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-        <tr>
-          <td id="100" class="id">Estudiante100</td>
-          <td class="editable" data-campo="nota1">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota2">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota3">
-            <span>60</span>
-          </td>
-          <td class="editable" data-campo="nota4">
-            <span>60</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </body>
-  </html>
+  <div class="container">
+   <form action="#" method="post" class="form-horizontal" role="form">
+   <field  set>
+      <legend>
+        Tabla con el plugin TableSorter y Bootstrap
+      </legend>
+
+      <div class="row">
+        <table class="editinplace"> <!-- bootstrap classes added by the uitheme widget -->
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>
+                <div>23/11/15 10:00</div>
+                <div>1ªEval Examén</div>
+              </th>
+              <th>
+                <div>01/12/15 10:00</div>
+                <div>1ªEval Trabajo</div>
+              </th>
+              <th>
+                <div>11/03/16 10:00</div>
+                <div>2ªEval Examén</div>
+              </th>
+              <th>
+                <div>25/03/16 10:00</div>
+                <div>2ªEval Oral</div>
+              </th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Nombre</th>
+              <th>
+                <div>23/11/15 10:00</div>
+                <div>1ªEval Examén</div>
+              </th>
+              <th>
+                <div>01/12/15 10:00</div>
+                <div>1ªEval Trabajo</div>
+              </th>
+              <th>
+                <div>11/03/16 10:00</div>
+                <div>2ªEval Examén</div>
+              </th>
+              <th>
+                <div>25/03/16 10:00</div>
+                <div>2ªEval Oral</div>
+              </th>
+            </tr>
+            <tr>
+              <th colspan="5" class="ts-pager form-horizontal">
+                <button type="button" class="btn first"><i class="icon-step-backward glyphicon glyphicon-step-backward"></i></button>
+                <button type="button" class="btn prev"><i class="icon-arrow-left glyphicon glyphicon-backward"></i></button>
+                <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+                <button type="button" class="btn next"><i class="icon-arrow-right glyphicon glyphicon-forward"></i></button>
+                <button type="button" class="btn last"><i class="icon-step-forward glyphicon glyphicon-step-forward"></i></button>
+                <select class="pagesize input-mini" title="Select page size">
+                  <option selected="selected" value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="40">40</option>
+                </select>
+                <select class="pagenum input-mini" title="Select page number"></select>
+              </th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <!-- (tr>td[id="$" class="id"]{Estudiante$}+(td.editable[data-campo="nota$"]{<span>60</span>})*4)*100 -->
+            <tr>
+              <td id="1" class="id">Estudiante1</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="2" class="id">Estudiante2</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="3" class="id">Estudiante3</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="4" class="id">Estudiante4</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="5" class="id">Estudiante5</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="6" class="id">Estudiante6</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="7" class="id">Estudiante7</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="8" class="id">Estudiante8</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="9" class="id">Estudiante9</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="10" class="id">Estudiante10</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="11" class="id">Estudiante11</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="12" class="id">Estudiante12</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="13" class="id">Estudiante13</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="14" class="id">Estudiante14</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="15" class="id">Estudiante15</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="16" class="id">Estudiante16</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="17" class="id">Estudiante17</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="18" class="id">Estudiante18</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="19" class="id">Estudiante19</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="20" class="id">Estudiante20</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="21" class="id">Estudiante21</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="22" class="id">Estudiante22</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="23" class="id">Estudiante23</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="24" class="id">Estudiante24</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="25" class="id">Estudiante25</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="26" class="id">Estudiante26</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="27" class="id">Estudiante27</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="28" class="id">Estudiante28</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="29" class="id">Estudiante29</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="30" class="id">Estudiante30</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="31" class="id">Estudiante31</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="32" class="id">Estudiante32</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="33" class="id">Estudiante33</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="34" class="id">Estudiante34</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="35" class="id">Estudiante35</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="36" class="id">Estudiante36</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="37" class="id">Estudiante37</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="38" class="id">Estudiante38</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="39" class="id">Estudiante39</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="40" class="id">Estudiante40</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="41" class="id">Estudiante41</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="42" class="id">Estudiante42</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="43" class="id">Estudiante43</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="44" class="id">Estudiante44</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="45" class="id">Estudiante45</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="46" class="id">Estudiante46</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="47" class="id">Estudiante47</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="48" class="id">Estudiante48</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="49" class="id">Estudiante49</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="50" class="id">Estudiante50</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="51" class="id">Estudiante51</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="52" class="id">Estudiante52</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="53" class="id">Estudiante53</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="54" class="id">Estudiante54</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="55" class="id">Estudiante55</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="56" class="id">Estudiante56</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="57" class="id">Estudiante57</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="58" class="id">Estudiante58</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="59" class="id">Estudiante59</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="60" class="id">Estudiante60</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="61" class="id">Estudiante61</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="62" class="id">Estudiante62</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="63" class="id">Estudiante63</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="64" class="id">Estudiante64</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="65" class="id">Estudiante65</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="66" class="id">Estudiante66</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="67" class="id">Estudiante67</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="68" class="id">Estudiante68</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="69" class="id">Estudiante69</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="70" class="id">Estudiante70</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="71" class="id">Estudiante71</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="72" class="id">Estudiante72</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="73" class="id">Estudiante73</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="74" class="id">Estudiante74</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="75" class="id">Estudiante75</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="76" class="id">Estudiante76</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="77" class="id">Estudiante77</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="78" class="id">Estudiante78</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="79" class="id">Estudiante79</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="80" class="id">Estudiante80</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="81" class="id">Estudiante81</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="82" class="id">Estudiante82</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="83" class="id">Estudiante83</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="84" class="id">Estudiante84</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="85" class="id">Estudiante85</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="86" class="id">Estudiante86</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="87" class="id">Estudiante87</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="88" class="id">Estudiante88</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="89" class="id">Estudiante89</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="90" class="id">Estudiante90</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="91" class="id">Estudiante91</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="92" class="id">Estudiante92</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="93" class="id">Estudiante93</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="94" class="id">Estudiante94</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="95" class="id">Estudiante95</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="96" class="id">Estudiante96</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="97" class="id">Estudiante97</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="98" class="id">Estudiante98</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="99" class="id">Estudiante99</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+            <tr>
+              <td id="100" class="id">Estudiante100</td>
+              <td class="editable" data-campo="nota1">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota2">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota3">
+                <span>60</span>
+              </td>
+              <td class="editable" data-campo="nota4">
+                <span>60</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </fieldset>
+  </form>
+</div>
+</body>
+</html>

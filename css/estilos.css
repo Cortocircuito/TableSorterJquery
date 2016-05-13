@@ -1,0 +1,75 @@
+
+.editable span
+{
+    display: block;
+}
+.editable span:hover
+{
+    cursor: pointer;
+
+    background: url(../images/edit.png) right center no-repeat;
+}
+
+td input
+{
+    width: 40px;
+    height: 24px;
+    margin: 0;
+    padding: 0 5px;
+
+    vertical-align: middle;
+
+    border: 1px solid #1ab;
+    border-radius: 6px;
+}
+a.enlace
+{
+    display: inline-block;
+    overflow: hidden;
+
+    width: 24px;
+    height: 24px;
+    margin: 0 0 0 5px;
+
+    vertical-align: middle;
+    text-indent: -999em;
+}
+.guardar
+{
+    background: url(../images/save.png) 0 0 no-repeat;
+}
+.cancelar
+{
+    background: url(../images/cancel.png) 0 0 no-repeat;
+}
+
+.mensaje
+{
+    display: block;
+
+    margin: 0 0 20px 0;
+
+    text-align: center;
+}
+.ok
+{
+    display: block;
+
+    padding: 10px;
+
+    text-align: center;
+
+    color: #fff;
+    background: green;
+}
+.ko
+{
+    display: block;
+
+    padding: 10px;
+
+    text-align: center;
+
+    color: #fff;
+    background: red;
+}
